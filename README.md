@@ -5,8 +5,7 @@ This app is designed to calculate the contrast ratio of a selected color against
 > [!NOTE]
 > This app is built using HSB color modal.
 
-
-![Demo UI](https://github.com/sakaavee/Color-Contrast-App/assets/59090839/b67cd33a-827e-40ef-9b72-1fcd336619c0)
+![Demo UI](https://github.com/sakaavee/Color-Contrast-App/assets/59090839/52630e8f-dd9a-419e-b863-545bcf987b19)
 
 ## Features
 - **Brand Color Selection:** Provides options to choose a background color against which the contrast ratio will be calculated.
