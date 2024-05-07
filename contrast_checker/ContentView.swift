@@ -41,7 +41,7 @@ struct ContentView: View {
                 
                 
                 // Button to open Playground - START
-                Button("Show Demo") {
+                Button("View Demo") {
                     showModal = true
                 }
                 .padding()
@@ -53,29 +53,20 @@ struct ContentView: View {
                     Playground(color1: $color1, color2: $color2, accentText: $accentText, onAccent: onAccent)
                 }
                 // Button to open Playground - END
-                
-                VStack(spacing:24) {
-                    Text("Adjusted Color")
-                        .foregroundColor(accentText)
-                        .onAppear {
-                            self.accentText = self.color2  // Initial assignment
-                            adjustAccentColorProperties() //⭐️⭐️⭐️ HSB
-                        }
-                        .onChange(of: color2) { _, newColor in
-                            self.accentText = newColor  // Update when color2 changes
-                            adjustAccentColorProperties() //⭐️⭐️⭐️ HSB
-                        }
-                }
-                .padding()
-                
+                                
                 //Color picker section START
                 VStack{
                     
                     // Color picker 2 START
                     VStack(spacing: 16){
-                        colorPicker(label: "Select Color 👉", color: $color2)
-                            .onChange(of: color2) {
-                                calculateContrast()
+                        colorPicker(label: "Select Color", color: $color2)
+                            .onAppear{
+                                self.accentText = self.color2 // Initial assignment
+                                adjustAccentColorProperties() // Accent Color Change
+                            }
+                            .onChange(of: color2) { _, newColor in
+                                self.accentText = newColor // Update when accent color change (color2)
+                                calculateContrast() //
                                 adjustAccentColorProperties() //⭐️⭐️⭐️ HSB
                             }
                         
@@ -133,6 +124,14 @@ struct ContentView: View {
                     VStack{
                         // WCAG Normal Text AA & AAA START
                         VStack{
+                            
+                            HStack{
+                                Text("WCAG Score")
+                                    .font(.system(size: 19,weight: .bold))
+                                Spacer()
+                            }
+                            .padding(.vertical,12)
+                            
                             
                             HStack {
                                 Text("Normal Text")
@@ -233,7 +232,7 @@ struct ContentView: View {
                 
             }
         }
-        .navigationTitle("Dynamic Color")
+        .navigationTitle("Contrast Checker")
         .navigationBarTitleDisplayMode(.inline)
     }
         
@@ -320,10 +319,6 @@ struct ContentView: View {
 //     Accent Color Change (Light & Dark Theme) 🟢
 
 }
-
-
-
-
 
 // 🔴 New Approach
 extension UIColor {
